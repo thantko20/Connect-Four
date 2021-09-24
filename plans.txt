@@ -1,0 +1,38 @@
+- Create a Connect Four game
+- What is Connect Four game?
+  - Includes board with 6 rows and 7 columns
+  - Two-player game
+  - Wins when horizontal row or vertical row or diagonal row have same 4 colors
+
+- So how would I create this project?
+
+- This game will contain:
+  - Board object
+  - Player object
+  - Game object
+  - module for symbols
+  - module for colouring
+  
+- BOARD object should contain these methods:
+  - #create_board
+  - @board variable which will be assigned to #create_board's return value
+  - #display_board
+  - update_board
+
+- Player object should contain these methods:
+  - #ask_player_name
+
+- Game object should contain these methods:
+  - #initialize with @board object, player one and player two
+  - #player_input to ask player for column number
+  - #verify_input
+  - #game_over?
+    - there will be 4 conditions to win a game of connect four
+      - horizontal row
+      - vertical row
+      - left inclined diagonal row
+      - right inclined diagonal row
+    - #check_horizontal_row #TODO
+    - #check_vertical_row #TODO
+    - #check_left_diagonal_row #TODO
+    - #check_right_diagonal_row #TODO
