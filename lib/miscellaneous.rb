@@ -1,13 +1,15 @@
+require 'colorize'
+
 module Miscellaneous
-  def white_circle
-    "\u26aa"
+  def yellow_circle
+    "\u25cf".yellow
   end
 
-  def black_circle
-    "\u26bb"
+  def blue_circle
+    "\u25cf".blue
   end
 
   def empty_circle
-    "\u25ef"
+    "\u25cb"
   end
 end
