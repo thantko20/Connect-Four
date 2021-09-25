@@ -5,7 +5,7 @@ class Board
     @board = Array.new(6) { Array.new(7) { "\u25cb" } }
   end
 
-  def board_skeleton
+  def display_board
     @board.each do |row|
       puts row.join(' ')
     end
