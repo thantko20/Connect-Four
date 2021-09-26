@@ -1,7 +1,6 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'miscellaneous'
-require 'pry-byebug'
 
 class Game
   include Miscellaneous
@@ -18,15 +17,16 @@ class Game
     loop do
       curr_player = player_turn
       @board.display_board
-      column = player_input
+      column = player_input(curr_player)
       @board.update_board(@board.available_row(column), column, curr_player.symbol)
       break if game_over?(curr_player) || draw?
     end
     @board.display_board
   end
 
-  def player_input
+  def player_input(player)
     loop do
+      puts "#{player.symbol} #{player.name}'s turn."
       puts 'Enter column number: '
       column = gets.chomp.to_i - 1
       return column if verify_input(column)
