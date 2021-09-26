@@ -19,7 +19,7 @@ class Game
       curr_player = player_turn
       @board.display_board
       column = player_input
-      @board.update_board(available_row(column), column, curr_player.symbol)
+      @board.update_board(@board.available_row(column), column, curr_player.symbol)
       break if game_over?(curr_player)
     end
     @board.display_board
@@ -36,20 +36,7 @@ class Game
   end
 
   def verify_input(input)
-    input.between?(0, 6) && !full_column?(input)
-  end
-
-  def full_column?(input)
-    @board.grid[0][input] != empty_circle
-  end
-
-  def available_row(column)
-    row = 0
-    loop do
-      return row if row == 5 || @board.grid[row + 1][column] != empty_circle
-
-      row += 1
-    end
+    input.between?(0, 6) && !@board.full_column?(input)
   end
 
   def player_turn
@@ -60,7 +47,7 @@ class Game
   def game_over?(player)
     6.times do |row|
       7.times do |column|
-        if check_row(row, column, player.symbol)
+        if @board.check_row(row, column, player.symbol)
           puts "#{player.name} won!"
           return true
         end
@@ -80,43 +67,4 @@ class Game
     @player1.name = ask_player_name(1)
     @player2.name = ask_player_name(2)
   end
-
-  def check_vertical(row, column, symbol)
-    return if row > 2
-
-    @board.grid[row][column] == symbol && @board.grid[row + 1][column] == symbol && @board.grid[row + 2][column] == symbol && @board.grid[row + 3][column] == symbol
-  end
-
-  def check_horizontal(row, column, symbol)
-    return if column > 3
-
-    @board.grid[row][column] == symbol && @board.grid[row][column + 1] == symbol && @board.grid[row][column + 2] == symbol && @board.grid[row][column + 3] == symbol
-  end
-
-  def check_diagonals(row, column, symbol)
-    return unless row < 3
-
-    return true if check_right_diagonal(row, column, symbol)
-
-    true if check_left_diagonal(row, column, symbol)
-  end
-
-  def check_row(row, column, symbol)
-    check_horizontal(row, column, symbol) || check_vertical(row, column, symbol) || check_diagonals(row, column, symbol)
-  end
-
-  def check_left_diagonal(row, column, symbol)
-    return if column > 3
-
-    @board.grid[row][column] == symbol && @board.grid[row + 1][column + 1] == symbol && @board.grid[row + 2][column + 2] == symbol && @board.grid[row + 3][column + 3] == symbol
-  end
-
-  def check_right_diagonal(row, column, symbol)
-    return if column < 3
-
-    @board.grid[row][column] == symbol && @board.grid[row + 1][column - 1] == symbol && @board.grid[row + 2][column - 2] == symbol && @board.grid[row + 3][column - 3] == symbol
-  end
 end
-
-game = Game.new
-game.play
