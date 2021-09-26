@@ -60,7 +60,7 @@ class Game
   def game_over?(symbol)
     6.times do |row|
       7.times do |column|
-        return true if check_horizontal(row, column, symbol)
+        return true if check_row(row, column, symbol)
       end
     end
   end
@@ -87,5 +87,9 @@ class Game
 
   def check_diagonal
     
+  end
+
+  def check_row(row, column, symbol)
+    check_horizontal(row, column, symbol) || check_vertical(row, column, symbol)
   end
 end
