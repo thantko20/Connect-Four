@@ -20,7 +20,7 @@ class Game
       @board.display_board
       column = player_input
       @board.update_board(@board.available_row(column), column, curr_player.symbol)
-      break if game_over?(curr_player)
+      break if game_over?(curr_player) || draw?
     end
     @board.display_board
   end
@@ -54,6 +54,13 @@ class Game
       end
     end
     false
+  end
+
+  def draw?
+    if @turn == 42
+      puts 'Draw!'
+      true
+    end
   end
 
   private
