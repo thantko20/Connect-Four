@@ -49,7 +49,7 @@ class Game
     6.times do |row|
       7.times do |column|
         if @board.check_row(row, column, player.symbol)
-          puts "#{player.name} won!"
+          puts "\e[35m#{player.name}\e[0m won!"
           return true
         end
       end
