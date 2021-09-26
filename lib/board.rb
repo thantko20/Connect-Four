@@ -1,8 +1,10 @@
+require_relative 'miscellaneous'
+
 class Board
-  attr_accessor :board
+  include Miscellaneous
 
   def initialize
-    @board = Array.new(6) { Array.new(7) { "\u25cb" } }
+    @board = Array.new(6) { Array.new(7) { empty_circle } }
   end
 
   def display_board
@@ -11,7 +13,8 @@ class Board
     end
     puts (1..7).to_a.join(' ')
   end
-end
 
-board = Board.new
-board.display_board
+  def update_board(row, column, symbol)
+    @board[row][column] = symbol
+  end
+end
