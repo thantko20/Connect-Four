@@ -88,6 +88,3 @@ class Game
     @player2.name = ask_player_name(2)
   end
 end
-
-game = Game.new
-game.play
