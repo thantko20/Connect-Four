@@ -20,6 +20,19 @@ class Board
     @grid[row][column] = symbol
   end
 
+  def full_column?(input)
+    @board.grid[0][input] != empty_circle
+  end
+
+  def available_row(column)
+    row = 0
+    loop do
+      return row if row == 5 || @board.grid[row + 1][column] != empty_circle
+
+      row += 1
+    end
+  end
+
   def check_vertical(row, column, symbol)
     return if row > 2
 
