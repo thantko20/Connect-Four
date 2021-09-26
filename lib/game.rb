@@ -13,6 +13,7 @@ class Game
   end
 
   def play
+    introduction
     set_player_name
     loop do
       curr_player = player_turn
@@ -65,6 +66,18 @@ class Game
 
   private
 
+  def introduction
+    puts <<~HEREDOC
+        Welcome to Connect Four!
+
+        This is a PvP game. Match the same colour in four consecutive cells to win!
+
+        Goodluck!
+        Type any to continue:
+    HEREDOC
+    gets.chomp
+  end
+
   def ask_player_name(number)
     puts "Enter player#{number} name: "
     gets.chomp
@@ -75,3 +88,6 @@ class Game
     @player2.name = ask_player_name(2)
   end
 end
+
+game = Game.new
+game.play
