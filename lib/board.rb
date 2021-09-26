@@ -19,4 +19,40 @@ class Board
   def update_board(row, column, symbol)
     @grid[row][column] = symbol
   end
+
+  def check_vertical(row, column, symbol)
+    return if row > 2
+
+    @board.grid[row][column] == symbol && @board.grid[row + 1][column] == symbol && @board.grid[row + 2][column] == symbol && @board.grid[row + 3][column] == symbol
+  end
+
+  def check_horizontal(row, column, symbol)
+    return if column > 3
+
+    @board.grid[row][column] == symbol && @board.grid[row][column + 1] == symbol && @board.grid[row][column + 2] == symbol && @board.grid[row][column + 3] == symbol
+  end
+
+  def check_diagonals(row, column, symbol)
+    return unless row < 3
+
+    return true if check_right_diagonal(row, column, symbol)
+
+    true if check_left_diagonal(row, column, symbol)
+  end
+
+  def check_row(row, column, symbol)
+    check_horizontal(row, column, symbol) || check_vertical(row, column, symbol) || check_diagonals(row, column, symbol)
+  end
+
+  def check_left_diagonal(row, column, symbol)
+    return if column > 3
+
+    @board.grid[row][column] == symbol && @board.grid[row + 1][column + 1] == symbol && @board.grid[row + 2][column + 2] == symbol && @board.grid[row + 3][column + 3] == symbol
+  end
+
+  def check_right_diagonal(row, column, symbol)
+    return if column < 3
+
+    @board.grid[row][column] == symbol && @board.grid[row + 1][column - 1] == symbol && @board.grid[row + 2][column - 2] == symbol && @board.grid[row + 3][column - 3] == symbol
+  end
 end
