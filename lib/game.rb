@@ -57,8 +57,12 @@ class Game
     @turn.odd? ? @player1 : @player2
   end
 
-  def game_over?
-    check_horizontal || check_vertical || check_diagonal
+  def game_over?(symbol)
+    6.times do |row|
+      7.times do |column|
+        return true if check_horizontal(row, column, symbol)
+      end
+    end
   end
 
   private
@@ -73,12 +77,12 @@ class Game
     @player2.name = ask_player_name(2)
   end
 
-  def check_horizontal
-    
+  def check_horizontal(row, column, symbol)
+    @board.grid[row + 1][column] == symbol && @board.grid[row + 2][column] == symbol && @board.grid[row + 3][column] == symbol
   end
 
-  def check_vertical
-    
+  def check_vertical(row, column, symbol)
+    @board.grid[row][column + 1] == symbol && @board.grid[row][column + 2] == symbol && @board.grid[row][column + 3] == symbol
   end
 
   def check_diagonal
