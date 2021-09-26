@@ -1,12 +1,10 @@
-require 'colorize'
-
 module Miscellaneous
   def yellow_circle
-    "\u25cf".yellow
+    "\e[33m\u25cf\e[0m"
   end
 
   def blue_circle
-    "\u25cf".blue
+    "\e[34m\u25cf\e[0m"
   end
 
   def empty_circle
