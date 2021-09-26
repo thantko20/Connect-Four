@@ -24,6 +24,7 @@ class Game
       @board.update_board(row, column, symbol)
       break if game_over?(curr_player)
     end
+    @board.display_board
   end
 
   def player_input
@@ -60,8 +61,8 @@ class Game
 
   def game_over?(player)
     symbol = player.symbol
-    6.times do |row|
-      7.times do |column|
+    5.times do |row|
+      6.times do |column|
         if check_row(row, column, symbol)
           puts "#{player.name} won!"
           return true
@@ -82,11 +83,15 @@ class Game
     @player2.name = ask_player_name(2)
   end
 
-  def check_horizontal(row, column, symbol)
+  def check_vertical(row, column, symbol)
+    return if row > 2
+
     @board.grid[row + 1][column] == symbol && @board.grid[row + 2][column] == symbol && @board.grid[row + 3][column] == symbol
   end
 
-  def check_vertical(row, column, symbol)
+  def check_horizontal(row, column, symbol)
+    return if column > 3
+
     @board.grid[row][column + 1] == symbol && @board.grid[row][column + 2] == symbol && @board.grid[row][column + 3] == symbol
   end
 
@@ -108,3 +113,6 @@ class Game
     @board.grid[row + 1][column - 1] == symbol && @board.grid[row + 2][column - 2] == symbol && @board.grid[row + 3][column - 3] == symbol
   end
 end
+
+game = Game.new
+game.play
