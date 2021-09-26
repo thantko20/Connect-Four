@@ -1,8 +1,8 @@
 class Player
   attr_accessor :name, :symbol
 
-  def initialize
+  def initialize(symbol)
     @name = nil
-    @symbol = nil
+    @symbol = symbol
   end
 end
