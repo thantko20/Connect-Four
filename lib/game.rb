@@ -18,7 +18,7 @@ class Game
       @board.display_board
       set_player_name
       column = player_input
-      row = available_row
+      row = available_row(column)
       @board.update_board(row, column, symbol)
     end
   end
@@ -46,6 +46,7 @@ class Game
     row = 0
     loop do
       return row if row == 6 || @board.grid[row + 1][column] != empty_circle
+      row += 1
     end
   end
 
@@ -63,4 +64,4 @@ class Game
 end
 
 game = Game.new
-game.play
+game.player_input
