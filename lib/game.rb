@@ -3,6 +3,8 @@ require_relative 'player'
 require_relative 'miscellaneous'
 
 class Game
+  include Miscellaneous
+
   def initialize
     @board = Board.new
     @player1 = Player.new(yellow_circle)
