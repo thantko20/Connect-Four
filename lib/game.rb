@@ -22,6 +22,7 @@ class Game
       row = available_row(column)
       symbol = curr_player.symbol
       @board.update_board(row, column, symbol)
+      break if game_over?(curr_player)
     end
   end
 
@@ -57,10 +58,14 @@ class Game
     @turn.odd? ? @player1 : @player2
   end
 
-  def game_over?(symbol)
+  def game_over?(player)
+    symbol = player.symbol
     6.times do |row|
       7.times do |column|
-        return true if check_row(row, column, symbol)
+        if check_row(row, column, symbol)
+          puts "#{player.name} won!"
+          return true
+        end
       end
     end
   end
@@ -85,11 +90,21 @@ class Game
     @board.grid[row][column + 1] == symbol && @board.grid[row][column + 2] == symbol && @board.grid[row][column + 3] == symbol
   end
 
-  def check_diagonal
-    
+  def check_diagonals(row, column, symbol)
+    return unless column == 3 && row < 2
+
+    check_left_diagonal(row, column, symbol) || check_right_diagonal(row, column, symbol)
   end
 
   def check_row(row, column, symbol)
-    check_horizontal(row, column, symbol) || check_vertical(row, column, symbol)
+    check_horizontal(row, column, symbol) || check_vertical(row, column, symbol) || check_diagonals(row, column, symbol)
+  end
+
+  def check_left_diagonal(row, column, symbol)
+    @board.grid[row + 1][column + 1] == symbol && @board.grid[row + 2][column + 2] == symbol && @board.grid[row + 3][column + 3] == symbol
+  end
+
+  def check_right_diagonal(row, column, symbol)
+    @board.grid[row + 1][column - 1] == symbol && @board.grid[row + 2][column - 2] == symbol && @board.grid[row + 3][column - 3] == symbol
   end
 end
