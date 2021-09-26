@@ -1,6 +1,7 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'miscellaneous'
+require 'pry-byebug'
 
 class Game
   include Miscellaneous
@@ -19,6 +20,7 @@ class Game
       set_player_name
       column = player_input
       row = available_row(column)
+      symbol = blue_circle
       @board.update_board(row, column, symbol)
     end
   end
@@ -45,7 +47,8 @@ class Game
   def available_row(column)
     row = 0
     loop do
-      return row if row == 6 || @board.grid[row + 1][column] != empty_circle
+      return row if row == 5 || @board.grid[row + 1][column] != empty_circle
+
       row += 1
     end
   end
@@ -64,4 +67,4 @@ class Game
 end
 
 game = Game.new
-game.player_input
+game.play
