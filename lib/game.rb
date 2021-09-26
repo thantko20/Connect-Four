@@ -14,13 +14,13 @@ class Game
   end
 
   def play
-    #TODO
+    set_player_name
     loop do
+      curr_player = player_turn
       @board.display_board
-      set_player_name
       column = player_input
       row = available_row(column)
-      symbol = blue_circle
+      symbol = curr_player.symbol
       @board.update_board(row, column, symbol)
     end
   end
@@ -28,7 +28,7 @@ class Game
   def player_input
     loop do
       puts 'Enter column number: '
-      column = gets.chomp.to_i
+      column = gets.chomp.to_i - 1
       return column if verify_input(column)
 
       puts "Invalid input!\n\n"
@@ -36,7 +36,6 @@ class Game
   end
 
   def verify_input(input)
-    input -= 1
     input.between?(0, 6) && !full_column?(input)
   end
 
@@ -53,6 +52,15 @@ class Game
     end
   end
 
+  def player_turn
+    @turn += 1
+    @turn.odd? ? @player1 : @player2
+  end
+
+  def game_over?
+    check_horizontal || check_vertical || check_diagonal
+  end
+
   private
 
   def ask_player_name(number)
@@ -64,7 +72,16 @@ class Game
     @player1.name = ask_player_name(1)
     @player2.name = ask_player_name(2)
   end
-end
 
-game = Game.new
-game.play
+  def check_horizontal
+    
+  end
+
+  def check_vertical
+    
+  end
+
+  def check_diagonal
+    
+  end
+end
