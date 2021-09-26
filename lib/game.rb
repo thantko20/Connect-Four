@@ -96,7 +96,7 @@ class Game
   end
 
   def check_diagonals(row, column, symbol)
-    return unless column == 3 && row < 3
+    return unless row < 3
 
     check_left_diagonal(row, column, symbol) || check_right_diagonal(row, column, symbol)
   end
@@ -114,5 +114,5 @@ class Game
   end
 end
 
-game = Game.new
-game.play
+#game = Game.new
+#game.play
