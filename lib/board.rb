@@ -48,9 +48,7 @@ class Board
   def check_diagonals(row, column, symbol)
     return unless row < 3
 
-    return true if check_right_diagonal(row, column, symbol)
-
-    true if check_left_diagonal(row, column, symbol)
+    check_right_diagonal(row, column, symbol) || check_left_diagonal(row, column, symbol)
   end
 
   def check_row(row, column, symbol)
