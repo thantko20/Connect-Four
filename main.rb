@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require_relative './lib/game'
 
 def main
   loop do
     game = Game.new
     game.play
-    break if !another_game?
+    break unless another_game?
   end
 end
 
