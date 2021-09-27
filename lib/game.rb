@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'board'
 require_relative 'player'
 require_relative 'miscellaneous'
@@ -68,12 +70,12 @@ class Game
 
   def introduction
     puts <<~HEREDOC
-        Welcome to Connect Four!
+      Welcome to Connect Four!
 
-        This is a PvP game. Match the same colour in four consecutive cells to win!
+      This is a PvP game. Match the same colour in four consecutive cells to win!
 
-        Goodluck!
-        Type any to continue:
+      Goodluck!
+      Type any to continue:
     HEREDOC
     gets.chomp
   end
